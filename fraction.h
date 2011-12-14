@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-template<typename numType, typename denomType>
+template<typename numType = int, typename denomType = int>
 struct fraction {
     numType numerator;
     denomType denominator;
