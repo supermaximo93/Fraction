@@ -4,15 +4,16 @@
 #include <iostream>
 
 template<typename numType = int, typename denomType = int>
-struct fraction {
+struct fraction
+{
     numType numerator;
     denomType denominator;
 
     fraction<numType, denomType>()
         : numerator(0), denominator(0) {}
 
-    fraction<numType, denomType>(numType numerator, denomType denominator) :
-        numerator(numerator), denominator(denominator) {}
+    fraction<numType, denomType>(numType numerator, denomType denominator)
+        : numerator(numerator), denominator(denominator) {}
 
     template<typename nt, typename dt>
     fraction<numType, denomType> operator +(const fraction<nt, dt> & f) const
