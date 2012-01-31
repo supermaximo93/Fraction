@@ -109,9 +109,9 @@ struct fraction
         return *this;
     }
 
-    fraction<numType, denomType> & operator -=(const denomType & value)
+    fraction<numType, denomType> & operator -=(const numType & value)
     {
-        denominator -= value * denominator;
+        numerator -= value * denominator;
         return *this;
     }
 
@@ -175,7 +175,7 @@ struct fraction
     template<typename nt, typename dt>
     bool operator ==(const fraction<nt, dt> & f) const
     {
-        return (double(numerator) / double(denominator) == double(f.numerator) / double(f.denominator));
+        return (fabs(double(numerator) / double(denominator) - double(f.numerator) / double(f.denominator)) < 0.00001);
     }
 
     template<typename type>
@@ -187,7 +187,7 @@ struct fraction
     template<typename nt, typename dt>
     bool operator !=(const fraction<nt, dt> & f) const
     {
-        return (double(numerator) / double(denominator) != double(f.numerator) / double(f.denominator));
+        return (fabs(double(numerator) / double(denominator) - double(f.numerator) / double(f.denominator)) > 0.00001);
     }
 
     template<typename type>
@@ -199,6 +199,7 @@ struct fraction
     template<typename nt, typename dt>
     bool operator >(const fraction<nt, dt> & f) const
     {
+        if (*this == f) return false;
         return (double(numerator) / double(denominator) > double(f.numerator) / double(f.denominator));
     }
 
@@ -211,6 +212,7 @@ struct fraction
     template<typename nt, typename dt>
     bool operator <(const fraction<nt, dt> & f) const
     {
+        if (*this == f) return false;
         return (double(numerator) / double(denominator) < double(f.numerator) / double(f.denominator));
     }
 
@@ -223,6 +225,7 @@ struct fraction
     template<typename nt, typename dt>
     bool operator >=(const fraction<nt, dt> & f) const
     {
+        if (*this == f) return true;
         return (double(numerator) / double(denominator) >= double(f.numerator) / double(f.denominator));
     }
 
@@ -235,6 +238,7 @@ struct fraction
     template<typename nt, typename dt>
     bool operator <=(const fraction<nt, dt> & f) const
     {
+        if (*this == f) return true;
         return (double(numerator) / double(denominator) <= double(f.numerator) / double(f.denominator));
     }
 
